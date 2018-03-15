@@ -1,11 +1,8 @@
-FROM alpine
+FROM phpdrone/composer:php71-latest 
 
-ENV USER root
-ENV HOME /root
 ENV PLUGIN_LOCK_FILE composer.lock
 
-RUN apk add --update curl ca-certificates && \
-    rm -rf /var/cache/apk/*
-
+RUN composer global require sensiolabs/security-checker
 ADD run.sh /run.sh
-ENTRYPOINT ["/run.sh"]
+
+ENTRYPOINT [ "/run.sh" ]
